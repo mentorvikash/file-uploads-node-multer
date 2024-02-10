@@ -3,9 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/main.css" />
     <title>File Upload Page</title>
   </head>
   <body>
-    <h1>Uplaad File</h1>
+    <h1 class="heading">Upload Files</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="file"></label>
+      <input
+        type="file"
+        name="file"
+        id="uplaodfile"
+        accept="image/*"
+        required
+      />
+      <button type="submit">Upload</button>
+    </form>
+
+    <% if (files.length > 0) { %>
+    <h2>Uploaded Files</h2>
+    <ul>
+      <% files.forEach(file => { %>
+
+      <li><strong>Filename:</strong> <%= file.filename %></li>
+      <li><strong>Originalname:</strong> <%= file.originalname %></li>
+      <li><strong>Mimetype:</strong> <%= file.mimetype %></li>
+      <li><strong>Size:</strong> <%= file.size %> bytes</li>
+      <!-- Display image if it's an image -->
+      <% if (file.mimetype.startsWith('image')) { %>
+      <img src="/uploads/<%= file.filename %>" alt="Uploaded Image" />
+      <% } %> <% }); %>
+    </ul>
+    <% } %>
   </body>
 </html>

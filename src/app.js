@@ -10,14 +10,6 @@ const app = express()
 // Define port
 const port = process.env.PORT
 
-// Set up middleware for handling file uploads
-const storage = multer.diskStorage({
-    destination: path.join(__dirname + "./../uploads"),
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname))
-    }
-})
-
 // set the static folder
 app.use(express.static("public"))
 // set the default encoder provided by express
@@ -34,5 +26,3 @@ app.use("/", indexRoutes);
 app.listen(port, () => {
     console.log("server is running at " + port)
 })
-
-module.exports = { storage }
