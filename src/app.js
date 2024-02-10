@@ -18,9 +18,6 @@ const storage = multer.diskStorage({
     }
 })
 
-// the default destination to upload files
-const upload = multer({ storage })
-
 // set the static folder
 app.use(express.static("public"))
 // set the default encoder provided by express
@@ -37,3 +34,5 @@ app.use("/", indexRoutes);
 app.listen(port, () => {
     console.log("server is running at " + port)
 })
+
+module.exports = { storage }
